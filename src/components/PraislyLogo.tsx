@@ -2,7 +2,6 @@
 // The "P" has a distinctive double-loop organic shape
 
 export function PraislyLogo({ className = '', color = 'currentColor', size = 24 }: { className?: string; color?: string; size?: number }) {
-  const scale = size / 24
   return (
     <svg
       className={className}
