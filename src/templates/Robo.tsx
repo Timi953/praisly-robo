@@ -2,7 +2,6 @@ import { PraislyLogo } from '../components/PraislyLogo'
 import { ThemeToggle, useTheme } from '../components/ThemeToggle'
 import { MiniSparkline } from '../components/MiniSparkline'
 import { InteractiveRobotSpline } from '../components/InteractiveRobotSpline'
-import { Bot, Cpu, Zap, Activity } from 'lucide-react'
 import {
   metrics,
   sparkRevenue, sparkClients, sparkAppointments, sparkRating,
@@ -10,19 +9,11 @@ import {
 
 const SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode'
 
-const navItems = [
-  { label: 'Overview', icon: Bot },
-  { label: 'Systems', icon: Cpu },
-  { label: 'Energy', icon: Zap },
-  { label: 'Vitals', icon: Activity },
-]
-
 export default function Robo() {
   const { theme, resolved, setTheme } = useTheme()
   const bg = resolved === 'dark' ? '#000' : '#FFF'
   const fg = resolved === 'dark' ? '#FFF' : '#000'
   const muted = resolved === 'dark' ? '#555' : '#AAA'
-  const rule = resolved === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'
   const glassBg = resolved === 'dark'
     ? 'rgba(0,0,0,0.7)'
     : 'rgba(255,255,255,0.7)'
@@ -31,53 +22,19 @@ export default function Robo() {
     : 'rgba(0,0,0,0.1)'
 
   return (
-    <div style={{ background: bg, color: fg, height: '100vh', fontFamily: "'Plus Jakarta Sans', sans-serif", display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}>
-      {/* Compact top bar */}
-      <header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 24px',
-          height: 48,
-          borderBottom: `1px solid ${rule}`,
-          flexShrink: 0,
-          position: 'relative',
-          zIndex: 10,
-          background: bg,
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <PraislyLogo color={fg} size={16} />
-        </div>
-        <nav style={{ display: 'flex', gap: 20 }}>
-          {navItems.map((item, i) => {
-            const Icon = item.icon
-            return (
-              <a
-                key={item.label}
-                href="#"
-                style={{
-                  fontSize: 12,
-                  fontWeight: i === 0 ? 600 : 400,
-                  color: i === 0 ? fg : muted,
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 5,
-                }}
-              >
-                <Icon size={13} strokeWidth={1.5} />
-                {item.label}
-              </a>
-            )
-          })}
-        </nav>
-        <ThemeToggle theme={theme} setTheme={setTheme} />
-      </header>
+    <div style={{ background: bg, color: fg, height: '100vh', fontFamily: "'Plus Jakarta Sans', sans-serif", overflow: 'hidden', position: 'relative' }}>
+      {/* Logo */}
+      <div style={{ position: 'absolute', top: 20, left: 24, zIndex: 10 }}>
+        <PraislyLogo color={fg} size={16} />
+      </div>
 
-      {/* Robot hero area */}
-      <div style={{ flex: 1, position: 'relative' }}>
+      {/* Theme toggle */}
+      <div style={{ position: 'absolute', top: 16, right: 24, zIndex: 10 }}>
+        <ThemeToggle theme={theme} setTheme={setTheme} />
+      </div>
+
+      {/* Robot scene — full viewport */}
+      <div style={{ width: '100%', height: '100%', position: 'relative' }}>
         <InteractiveRobotSpline
           scene={SPLINE_SCENE}
           className="w-full h-full"
