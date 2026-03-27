@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ========== PULSE glow animation ========== */
+.pulse-border {
+  position: relative;
+  border: 1px solid #00FF88;
+  background: transparent;
+  color: #00FF88;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.pulse-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 136, 0.7) 50%, transparent 100%);
+  background-size: 200% 100%;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.pulse-border:hover::after {
+  opacity: 1;
+  animation: pulse-sweep 1.5s ease-in-out infinite;
+}
+
+.pulse-border:hover {
+  box-shadow: 0 0 24px rgba(0, 255, 136, 0.15);
+}
+
+@keyframes pulse-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Light mode PULSE adjustments */
+.pulse-light .pulse-border {
+  border-color: #00994D;
+  color: #00994D;
+}
+
+.pulse-light .pulse-border::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 153, 77, 0.5) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+
+.pulse-light .pulse-border:hover {
+  box-shadow: 0 0 20px rgba(0, 153, 77, 0.1);
+}
+
+/* ========== Utility classes ========== */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { scrollbar-width: none; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
