@@ -1,4 +1,3 @@
-import { PraislyLogo } from '../components/PraislyLogo'
 import { ThemeToggle, useTheme } from '../components/ThemeToggle'
 import { MiniSparkline } from '../components/MiniSparkline'
 import { InteractiveRobotSpline } from '../components/InteractiveRobotSpline'
@@ -11,8 +10,9 @@ const SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splineco
 
 export default function Robo() {
   const { theme, resolved, setTheme } = useTheme()
-  const bg = resolved === 'dark' ? '#000' : '#FFF'
+  const bg = resolved === 'dark' ? '#000' : '#F8F8F8'
   const fg = resolved === 'dark' ? '#FFF' : '#000'
+  const logoSrc = `${import.meta.env.BASE_URL}praisly-logo-${resolved === 'dark' ? 'black' : 'white'}.webp`
   const muted = resolved === 'dark' ? '#555' : '#AAA'
   const glassBg = resolved === 'dark'
     ? 'rgba(0,0,0,0.7)'
@@ -25,7 +25,7 @@ export default function Robo() {
     <div style={{ background: bg, color: fg, height: '100vh', fontFamily: "'Plus Jakarta Sans', sans-serif", overflow: 'hidden', position: 'relative' }}>
       {/* Logo */}
       <div style={{ position: 'absolute', top: 20, left: 24, zIndex: 10 }}>
-        <PraislyLogo color={fg} size={16} />
+        <img src={logoSrc} alt="Praisly" style={{ height: 80, mixBlendMode: resolved === 'dark' ? 'screen' : 'multiply' }} />
       </div>
 
       {/* Theme toggle */}
